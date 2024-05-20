@@ -154,7 +154,7 @@ CHANGELOG = changelog_json
 ####################################
 
 DATA_DIR = str(Path(os.getenv("DATA_DIR", "./data")).resolve())
-FRONTEND_BUILD_DIR = str(Path(os.getenv("FRONTEND_BUILD_DIR", "../build")))
+# FRONTEND_BUILD_DIR = str(Path(os.getenv("FRONTEND_BUILD_DIR", "../build")))
 
 try:
     with open(f"{DATA_DIR}/config.json", "r") as f:
@@ -168,7 +168,7 @@ except:
 
 STATIC_DIR = str(Path(os.getenv("STATIC_DIR", "./static")).resolve())
 
-shutil.copyfile(f"{FRONTEND_BUILD_DIR}/favicon.png", f"{STATIC_DIR}/favicon.png")
+# shutil.copyfile(f"{FRONTEND_BUILD_DIR}/favicon.png", f"{STATIC_DIR}/favicon.png")
 
 ####################################
 # CUSTOM_NAME

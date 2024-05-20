@@ -33,7 +33,7 @@ langchain-chroma
 langchain-community
 fake_useragent
 chromadb
-sentence_transformers
+# sentence_transformers
 pypdf
 docx2txt
 unstructured
@@ -44,16 +44,18 @@ openpyxl
 pyxlsb
 xlrd
 
-opencv-python-headless
-rapidocr-onnxruntime
+# opencv-python-headless
+# rapidocr-onnxruntime
 
 fpdf2
 rank_bm25
 
-faster-whisper
+# faster-whisper
 
 PyJWT
 pyjwt[crypto]
 
 black
 langfuse
+
+mangum
