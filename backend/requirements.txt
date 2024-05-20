@@ -16,7 +16,7 @@ aiohttp
 peewee
 peewee-migrate
 psycopg2-binary
-pymysql
+# pymysql
 bcrypt
 
 # litellm==1.35.17
