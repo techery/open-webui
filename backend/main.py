@@ -47,18 +47,6 @@ logging.basicConfig(stream=sys.stdout, level=GLOBAL_LOG_LEVEL)
 log = logging.getLogger(__name__)
 log.setLevel(SRC_LOG_LEVELS["MAIN"])
 
-
-class SPAStaticFiles(StaticFiles):
-    async def get_response(self, path: str, scope):
-        try:
-            return await super().get_response(path, scope)
-        except (HTTPException, StarletteHTTPException) as ex:
-            if ex.status_code == 404:
-                return await super().get_response("index.html", scope)
-            else:
-                raise ex
-
-
 print(f"""
   Open WebUI
   v{VERSION} - building the best open-source AI user interface.      
@@ -72,69 +60,9 @@ app.state.MODEL_FILTER_LIST = MODEL_FILTER_LIST
 
 app.state.WEBHOOK_URL = WEBHOOK_URL
 
-origins = ["*"]
-
-
-# class RAGMiddleware(BaseHTTPMiddleware):
-#     async def dispatch(self, request: Request, call_next):
-#         if request.method == "POST" and (
-#             "/api/chat" in request.url.path or "/chat/completions" in request.url.path
-#         ):
-#             log.debug(f"request.url.path: {request.url.path}")
-
-#             # Read the original request body
-#             body = await request.body()
-#             # Decode body to string
-#             body_str = body.decode("utf-8")
-#             # Parse string to JSON
-#             data = json.loads(body_str) if body_str else {}
-
-#             # Example: Add a new key-value pair or modify existing ones
-#             # data["modified"] = True  # Example modification
-#             if "docs" in data:
-#                 data = {**data}
-#                 data["messages"] = rag_messages(
-#                     docs=data["docs"],
-#                     messages=data["messages"],
-#                     template=rag_app.state.RAG_TEMPLATE,
-#                     embedding_function=rag_app.state.EMBEDDING_FUNCTION,
-#                     k=rag_app.state.TOP_K,
-#                     reranking_function=rag_app.state.sentence_transformer_rf,
-#                     r=rag_app.state.RELEVANCE_THRESHOLD,
-#                     hybrid_search=rag_app.state.ENABLE_RAG_HYBRID_SEARCH,
-#                 )
-#                 del data["docs"]
-
-#                 log.debug(f"data['messages']: {data['messages']}")
-
-#             modified_body_bytes = json.dumps(data).encode("utf-8")
-
-#             # Replace the request body with the modified one
-#             request._body = modified_body_bytes
-
-#             # Set custom header to ensure content-length matches new body length
-#             request.headers.__dict__["_list"] = [
-#                 (b"content-length", str(len(modified_body_bytes)).encode("utf-8")),
-#                 *[
-#                     (k, v)
-#                     for k, v in request.headers.raw
-#                     if k.lower() != b"content-length"
-#                 ],
-#             ]
-
-#         response = await call_next(request)
-#         return response
-
-#     async def _receive(self, body: bytes):
-#         return {"type": "http.request", "body": body, "more_body": False}
-
-
-# app.add_middleware(RAGMiddleware)
-
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

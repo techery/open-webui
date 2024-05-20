@@ -19,14 +19,14 @@ psycopg2-binary
 pymysql
 bcrypt
 
-litellm==1.35.17
-litellm[proxy]==1.35.17
+# litellm==1.35.17
+# litellm[proxy]==1.35.17
 
 boto3
 
 argon2-cffi
 apscheduler
-google-generativeai
+# google-generativeai
 
 langchain
 langchain-chroma
@@ -34,21 +34,21 @@ langchain-community
 fake_useragent
 chromadb
 # sentence_transformers
-pypdf
-docx2txt
-unstructured
-markdown
-pypandoc
-pandas
-openpyxl
-pyxlsb
-xlrd
+# pypdf
+# docx2txt
+# unstructured
+# markdown
+# pypandoc
+# pandas
+# openpyxl
+# pyxlsb
+# xlrd
 
 # opencv-python-headless
 # rapidocr-onnxruntime
 
-fpdf2
-rank_bm25
+# fpdf2
+# rank_bm25
 
 # faster-whisper
 
