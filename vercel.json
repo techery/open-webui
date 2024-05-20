@@ -7,20 +7,9 @@
       "config": {
         "distDir": "build"
       }
-    },
-    {
-      "src": "backend/main.py",
-      "use": "@vercel/python",
-      "config": {
-        "distDir": "backend"
-      }
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "backend/main.py"
-    },
     {
       "src": "/(.*)",
       "dest": "frontend/$1"
