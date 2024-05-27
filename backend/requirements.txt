@@ -1,13 +1,12 @@
 fastapi
 uvicorn[standard]
 pydantic
-python-multipart
+# python-multipart
 
-flask
-flask_cors
+# flask
+# flask_cors
 
-python-socketio
-python-jose
+# python-jose
 passlib[bcrypt]
 uuid
 
@@ -16,46 +15,19 @@ aiohttp
 peewee
 peewee-migrate
 psycopg2-binary
-# pymysql
 bcrypt
-
-# litellm==1.35.17
-# litellm[proxy]==1.35.17
 
 boto3
 
 argon2-cffi
-apscheduler
-# google-generativeai
+# apscheduler
 
-langchain
-langchain-chroma
-langchain-community
-fake_useragent
-chromadb
-# sentence_transformers
-# pypdf
-# docx2txt
-# unstructured
-# markdown
-# pypandoc
-# pandas
-# openpyxl
-# pyxlsb
-# xlrd
-
-# opencv-python-headless
-# rapidocr-onnxruntime
-
-# fpdf2
-# rank_bm25
-
-# faster-whisper
+# langchain
+# langchain-chroma
+# langchain-community
+# fake_useragent
 
 PyJWT
 pyjwt[crypto]
-
-black
-langfuse
 
 mangum
