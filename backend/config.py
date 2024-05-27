@@ -1,16 +1,16 @@
 import os
 import sys
 import logging
-import chromadb
-from chromadb import Settings
+# import chromadb
+# from chromadb import Settings
 from base64 import b64encode
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 
 from pathlib import Path
 import json
 import yaml
 
-import markdown
+# import markdown
 import requests
 import shutil
 
@@ -117,34 +117,34 @@ except:
     changelog_content = ""
 
 # Convert markdown content to HTML
-html_content = markdown.markdown(changelog_content)
+# html_content = markdown.markdown(changelog_content)
 
 # Parse the HTML content
-soup = BeautifulSoup(html_content, "html.parser")
+# soup = BeautifulSoup(html_content, "html.parser")
 
 # Initialize JSON structure
 changelog_json = {}
 
-# Iterate over each version
-for version in soup.find_all("h2"):
-    version_number = version.get_text().strip().split(" - ")[0][1:-1]  # Remove brackets
-    date = version.get_text().strip().split(" - ")[1]
+# # Iterate over each version
+# for version in soup.find_all("h2"):
+#     version_number = version.get_text().strip().split(" - ")[0][1:-1]  # Remove brackets
+#     date = version.get_text().strip().split(" - ")[1]
 
-    version_data = {"date": date}
+#     version_data = {"date": date}
 
-    # Find the next sibling that is a h3 tag (section title)
-    current = version.find_next_sibling()
+#     # Find the next sibling that is a h3 tag (section title)
+#     current = version.find_next_sibling()
 
-    while current and current.name != "h2":
-        if current.name == "h3":
-            section_title = current.get_text().lower()  # e.g., "added", "fixed"
-            section_items = parse_section(current.find_next_sibling("ul"))
-            version_data[section_title] = section_items
+#     while current and current.name != "h2":
+#         if current.name == "h3":
+#             section_title = current.get_text().lower()  # e.g., "added", "fixed"
+#             section_items = parse_section(current.find_next_sibling("ul"))
+#             version_data[section_title] = section_items
 
-        # Move to the next element
-        current = current.find_next_sibling()
+#         # Move to the next element
+#         current = current.find_next_sibling()
 
-    changelog_json[version_number] = version_data
+#     changelog_json[version_number] = version_data
 
 
 CHANGELOG = changelog_json
@@ -417,8 +417,8 @@ if WEBUI_AUTH and WEBUI_SECRET_KEY == "":
 ####################################
 
 CHROMA_DATA_PATH = f"{DATA_DIR}/vector_db"
-CHROMA_TENANT = os.environ.get("CHROMA_TENANT", chromadb.DEFAULT_TENANT)
-CHROMA_DATABASE = os.environ.get("CHROMA_DATABASE", chromadb.DEFAULT_DATABASE)
+# CHROMA_TENANT = os.environ.get("CHROMA_TENANT", chromadb.DEFAULT_TENANT)
+# CHROMA_DATABASE = os.environ.get("CHROMA_DATABASE", chromadb.DEFAULT_DATABASE)
 CHROMA_HTTP_HOST = os.environ.get("CHROMA_HTTP_HOST", "")
 CHROMA_HTTP_PORT = int(os.environ.get("CHROMA_HTTP_PORT", "8000"))
 # Comma-separated list of header=value pairs
@@ -476,23 +476,23 @@ if USE_CUDA.lower() == "true":
 else:
     DEVICE_TYPE = "cpu"
 
-if CHROMA_HTTP_HOST != "":
-    CHROMA_CLIENT = chromadb.HttpClient(
-        host=CHROMA_HTTP_HOST,
-        port=CHROMA_HTTP_PORT,
-        headers=CHROMA_HTTP_HEADERS,
-        ssl=CHROMA_HTTP_SSL,
-        tenant=CHROMA_TENANT,
-        database=CHROMA_DATABASE,
-        settings=Settings(allow_reset=True, anonymized_telemetry=False),
-    )
-else:
-    CHROMA_CLIENT = chromadb.PersistentClient(
-        path=CHROMA_DATA_PATH,
-        settings=Settings(allow_reset=True, anonymized_telemetry=False),
-        tenant=CHROMA_TENANT,
-        database=CHROMA_DATABASE,
-    )
+# if CHROMA_HTTP_HOST != "":
+#     CHROMA_CLIENT = chromadb.HttpClient(
+#         host=CHROMA_HTTP_HOST,
+#         port=CHROMA_HTTP_PORT,
+#         headers=CHROMA_HTTP_HEADERS,
+#         ssl=CHROMA_HTTP_SSL,
+#         tenant=CHROMA_TENANT,
+#         database=CHROMA_DATABASE,
+#         settings=Settings(allow_reset=True, anonymized_telemetry=False),
+#     )
+# else:
+#     CHROMA_CLIENT = chromadb.PersistentClient(
+#         path=CHROMA_DATA_PATH,
+#         settings=Settings(allow_reset=True, anonymized_telemetry=False),
+#         tenant=CHROMA_TENANT,
+#         database=CHROMA_DATABASE,
+#     )
 
 CHUNK_SIZE = int(os.environ.get("CHUNK_SIZE", "1500"))
 CHUNK_OVERLAP = int(os.environ.get("CHUNK_OVERLAP", "100"))
