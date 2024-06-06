@@ -29,7 +29,6 @@ from config import (
     WEBUI_NAME,
     VERSION,
     CHANGELOG,
-    CACHE_DIR,
     STATIC_DIR,
     ENABLE_MODEL_FILTER,
     MODEL_FILTER_LIST,
@@ -66,7 +65,6 @@ app.add_middleware(
 )
 
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
-app.mount("/cache", StaticFiles(directory=CACHE_DIR), name="cache")
 
 @app.middleware("http")
 async def check_url(request: Request, call_next):

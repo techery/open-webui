@@ -201,30 +201,6 @@ if CUSTOM_NAME:
 
 
 ####################################
-# File Upload DIR
-####################################
-
-UPLOAD_DIR = f"{DATA_DIR}/uploads"
-Path(UPLOAD_DIR).mkdir(parents=True, exist_ok=True)
-
-
-####################################
-# Cache DIR
-####################################
-
-CACHE_DIR = f"{DATA_DIR}/cache"
-Path(CACHE_DIR).mkdir(parents=True, exist_ok=True)
-
-
-####################################
-# Docs DIR
-####################################
-
-DOCS_DIR = os.getenv("DOCS_DIR", f"{DATA_DIR}/docs")
-Path(DOCS_DIR).mkdir(parents=True, exist_ok=True)
-
-
-####################################
 # LITELLM_CONFIG
 ####################################
 
@@ -515,17 +491,6 @@ RAG_TEMPLATE = os.environ.get("RAG_TEMPLATE", DEFAULT_RAG_TEMPLATE)
 
 RAG_OPENAI_API_BASE_URL = os.getenv("RAG_OPENAI_API_BASE_URL", OPENAI_API_BASE_URL)
 RAG_OPENAI_API_KEY = os.getenv("RAG_OPENAI_API_KEY", OPENAI_API_KEY)
-
-####################################
-# Transcribe
-####################################
-
-WHISPER_MODEL = os.getenv("WHISPER_MODEL", "base")
-WHISPER_MODEL_DIR = os.getenv("WHISPER_MODEL_DIR", f"{CACHE_DIR}/whisper/models")
-WHISPER_MODEL_AUTO_UPDATE = (
-    os.environ.get("WHISPER_MODEL_AUTO_UPDATE", "").lower() == "true"
-)
-
 
 ####################################
 # Images
