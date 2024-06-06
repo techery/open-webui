@@ -8,13 +8,10 @@ import logging
 import aiohttp
 # import requests
 
-from mangum import Mangum
 from fastapi import FastAPI, Request, Depends, status
 from fastapi.staticfiles import StaticFiles
 from fastapi import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.exceptions import HTTPException as StarletteHTTPException
-# from starlette.middleware.base import BaseHTTPMiddleware
 
 
 from apps.openai.main import app as openai_app
@@ -68,6 +65,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+app.mount("/cache", StaticFiles(directory=CACHE_DIR), name="cache")
 
 @app.middleware("http")
 async def check_url(request: Request, call_next):
@@ -204,9 +203,3 @@ async def get_manifest_json():
         "orientation": "portrait-primary",
         "icons": [{"src": "/favicon.png", "type": "image/png", "sizes": "844x884"}],
     }
-
-
-app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
-app.mount("/cache", StaticFiles(directory=CACHE_DIR), name="cache")
-
-handler = Mangum(app)
